@@ -38,7 +38,7 @@ class Vigenere:
         self.key = key
         self.alphabet = alphabet
 
-    def _cycle_message(self, key:str, message_len: int) -> str:
+    def _cycle_key(self, key:str, message_len: int) -> str:
         """
         Crea una clave de igual longitud al mensaje repitiendo la
         misma.
@@ -52,11 +52,11 @@ class Vigenere:
         """
 
         mm = encode(message)
-        key = self._cycle_message(self.key, len(mm))
+        key = self._cycle_key(self.key, len(mm))
 
         return ''.join(
             map(
-                lambda x: self.alphabet.char((self.alphabet.ord(x[0]) + self.alphabet.ord(x[1])) % self.alphabet.len()),
+                lambda (Mi,Ki):=x : self.alphabet.char((self.alphabet.ord(Mi) + self.alphabet.ord(Ki)) % self.alphabet.len()),
                 zip(mm, key)
                 )
             )
@@ -72,7 +72,7 @@ class Vigenere:
 
         return ''.join(
             map(
-                lambda x: self.alphabet.char((self.alphabet.ord(x[0]) - self.alphabet.ord(x[1])) % self.alphabet.len()),
+                lambda (Mi, Ki) := x: self.alphabet.char((self.alphabet.ord(Mi) - self.alphabet.ord(Ki)) % self.alphabet.len()),
                 zip(mm, key)
                 )
             )
