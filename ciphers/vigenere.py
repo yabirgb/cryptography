@@ -56,7 +56,7 @@ class Vigenere:
 
         return ''.join(
             map(
-                lambda (Mi,Ki):=x : self.alphabet.char((self.alphabet.ord(Mi) + self.alphabet.ord(Ki)) % self.alphabet.len()),
+                lambda x : self.alphabet.char((self.alphabet.ord(x[0]) + self.alphabet.ord(x[1])) % self.alphabet.len()),
                 zip(mm, key)
                 )
             )
@@ -68,11 +68,11 @@ class Vigenere:
         """
 
         mm = encode(message)
-        key = self._cycle_message(self.key, len(mm))
+        key = self._cycle_key(self.key, len(mm))
 
         return ''.join(
             map(
-                lambda (Mi, Ki) := x: self.alphabet.char((self.alphabet.ord(Mi) - self.alphabet.ord(Ki)) % self.alphabet.len()),
+                lambda x: self.alphabet.char((self.alphabet.ord(x[0]) - self.alphabet.ord(x[1])) % self.alphabet.len()),
                 zip(mm, key)
                 )
             )
